@@ -5,20 +5,20 @@ async function request(path, options?) {
   return res.json();
 }
 
-export function getProjects() {
-  return request('/projects');
+export async function getProjects() {
+  return await request('/projects');
 }
 
-export function getTasks(projectId) {
-  return request(`/projects/${projectId}/tasks`);
+export async function getTasks(projectId) {
+  return await request(`/projects/${projectId}/tasks`);
 }
 
-export function updateTaskStatus(taskId, status) {
-  return request(`/tasks/${taskId}/status?status=${status}`, { method: 'PUT' });
+export async function updateTaskStatus(taskId, status) {
+  return await request(`/tasks/${taskId}/status?status=${status}`, { method: 'PUT' });
 }
 
-export function createTask(projectId, task) {
-  return request(`/projects/${projectId}/tasks`, {
+export async function createTask(projectId, task) {
+  return await request(`/projects/${projectId}/tasks`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(task),
