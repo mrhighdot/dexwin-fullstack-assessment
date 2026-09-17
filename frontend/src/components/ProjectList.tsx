@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getProjects } from '../api/client';
+import { getProjects, updateTaskStatus } from '../api/client';
+
 
 export default function ProjectList({ selectedProjectId, onSelect }) {
   const [projects, setProjects] = useState([]);
@@ -7,6 +8,16 @@ export default function ProjectList({ selectedProjectId, onSelect }) {
   useEffect(() => {
     getProjects().then(setProjects);
   }, []);
+
+  const handleSelectedProject =async (id, status)=>{
+      const response = await updateTaskStatus(id, status)
+      if (!response) {
+        return <span>Project Status cannot be updated</span>
+      }
+
+      return response.status
+  }
+
 
   return (
     <div className="project-list">

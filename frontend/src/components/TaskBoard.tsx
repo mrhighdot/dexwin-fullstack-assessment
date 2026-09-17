@@ -11,11 +11,11 @@ export default function TaskBoard({ projectId }) {
     });
   }, []);
 
-  const handleToggle = (task) => {
+  const handleToggle = async (task) => {
     const next = task.status === 'DONE' ? 'TODO' : 'DONE';
     task.status = next;
     setTasks(tasks);
-    updateTaskStatus(task.id, next);
+    await updateTaskStatus(task.id, next);
   };
 
   return (
